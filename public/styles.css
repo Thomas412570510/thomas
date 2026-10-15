@@ -1,7 +1,7 @@
-#countdown-timer {
-    background-color: #FFFACD; /* 明亮的黃色背景 */
-    color: ＃FFC0CB; /* 顯眼的紅色文字 */
-    border: 2px solid ＃FFC0CB; /* 紅色邊框 */
+﻿#countdown-timer {
+    background-color: #FFFACD; /* ?漁???脰???*/
+    color: 嚗FC0CB; /* 憿舐???脫?摮?*/
+    border: 2px solid 嚗FC0CB; /* 蝝?? */
     padding: 20px;
     text-align: center;
     font-size: 1rem; 
@@ -12,7 +12,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 #timer {
-    font-size: 1.5rem; /* 倒數數字更大 */
+    font-size: 1.5rem; /* ??詨??游之 */
     font-weight: bold;
 }
 #promotions {
@@ -34,7 +34,7 @@
 .promotion p {
     margin: 5px 0;
 }
-/* 重置一些基本樣式 */
+/* ?蔭銝鈭?祆見撘?*/
 * {
     margin: 0;
     padding: 0;
@@ -43,13 +43,13 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #F0F8FF; /* 愛麗斯藍 */
+    background-color: #F0F8FF; /* ???航? */
     color: #333;
     text-align: center;
 }
 
 header {
-    background-color: #D8BFD8; /* 淺粉色 */
+    background-color: #D8BFD8; /* 瘛箇???*/
     color: white;
     padding: 10px 0;
 }
@@ -77,16 +77,16 @@ section {
 }
 
 #home {
-    background-color: #b6f0e6; /* 淺綠色 */
+    background-color: #b6f0e6; /* 瘛箇???*/
 }
 
 #products {
-    background-color: #e5f2fd; /* 淺藍色 */
+    background-color: #e5f2fd; /* 瘛箄???*/
 }
 
 .product-container {
     display: grid;
-    grid-template-columns: repeat(5, 1fr); /* 每行五個商品 */
+    grid-template-columns: repeat(5, 1fr); /* 瘥?鈭???*/
     gap: 20px;
     justify-items: center;
     padding: 20px;
@@ -115,7 +115,7 @@ section {
 }
 
 button.add-to-cart {
-    background-color: #f1c6d0; /* 淺粉色 */
+    background-color: #f1c6d0; /* 瘛箇???*/
     color: white;
     border: none;
     padding: 5px 10px;
@@ -143,7 +143,7 @@ button#checkout-button:hover {
 }
 
 footer {
-    background-color: #f1c6d0; /* 淺粉色 */
+    background-color: #f1c6d0; /* 瘛箇???*/
     color: white;
     padding: 10px 0;
     position: fixed;
@@ -151,7 +151,7 @@ footer {
     width: 100%;
 }
 
-/* 購物車和結帳頁面 */
+/* 鞈潛頠?蝯董? */
 #cart, #checkout {
     background-color: #e5f2fd;
     padding: 20px;
@@ -189,3 +189,4 @@ footer {
 .cart-item button:hover {
     background-color: #F0F8FF;
 }
+

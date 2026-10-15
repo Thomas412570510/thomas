@@ -1,62 +1,58 @@
 const express = require('express');
 const path = require('path');
 const nodemailer = require('nodemailer');
-const bodyParser = require('body-parser');
 require('dotenv').config();
 
 const app = express();
-app.use(bodyParser.json());
+const PORT = process.env.PORT || 3000;
 
-// Email 發送設定
+// Middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Serve static frontend assets
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Email Transporter (configured via environment variables)
 const transporter = nodemailer.createTransport({
-    service: 'Gmail', // 或其他郵件服務供應商
+    service: 'Gmail',
     auth: {
-        user: 'zxc55815@gmail.com',
-        pass: 'Cindy931103'
         user: process.env.EMAIL_USERNAME,
         pass: process.env.EMAIL_PASSWORD
     }
 });
 
-const staticPath = [
-    "src/templates",
-    "src/lib",
-    "src/asserts"
-]
-staticPath.forEach(staticPath => {
-    app.use(express.static(path.join(__dirname, staticPath)));
-})
-// 處理發送 Email 的 API
+// API: Send Order Confirmation Email
 app.post('/send-email', (req, res) => {
     const { customerEmail, orderDetails, totalPrice } = req.body;
 
+    if (!customerEmail) {
+        return res.status(400).json({ success: false, message: '收件者 Email 為必填欄位' });
+    }
+
     const mailOptions = {
-        from: 'rachel05140516@gmail.com',
+        from: process.env.EMAIL_USERNAME || 'no-reply@mochistore.com',
         to: customerEmail,
         subject: '訂單確認 - Mochi Store',
-        text: `
-            您好，感謝您的訂單！
-            訂單詳情：${orderDetails}
-            總金額：NT$${totalPrice}
-            我們會盡快處理您的訂單。
-        `
+        text: `您好，感謝您在 Mochi Store 的購買！\n\n訂單詳情：\n${orderDetails || '無詳細資料'}\n\n總金額：NT$${totalPrice || 0}\n\n我們會盡快處理您的訂單。`
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
-            console.error(error);
-            res.status(500).send('Email 發送失敗');
-        } else {
-            console.log('Email sent: ' + info.response);
-            res.status(200).send('Email 發送成功');
+            console.error('[Error] Email 發送失敗:', error);
+            return res.status(500).json({ success: false, message: 'Email 發送失敗', error: error.message });
         }
+        console.log('[Success] Email sent:', info.response);
+        return res.status(200).json({ success: true, message: 'Email 發送成功' });
     });
 });
 
-app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "src/templates", "index.html"));
+// Root route
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
-// 啟動伺服器
-app.listen(3000, () => {
-    console.log('伺服器已啟動，監聽 3000 port');
+
+// Start Server
+app.listen(PORT, () => {
+    console.log(`[Mochi Store] 伺服器已啟動，監聽 http://localhost:${PORT}`);
 });
